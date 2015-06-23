@@ -17,13 +17,13 @@ BranchedBolt
 	 * @param dest   destination vector, where the bold ends
 	 * @param fade   assigns fade out rate, default of 50
 	 */
-	New(vector/start, vector/end, fade = 50)
+	New(vector/start, vector/end, fade = 50, targets=null)
 		..()
 
 		src.end  = end
 		src.fade = fade
 
-		Create(start, end)
+		Create(start, end, targets)
 
 	proc
 		/**
@@ -45,18 +45,28 @@ BranchedBolt
 		 * @param source source vector, where the bolt starts
 		 * @param dest   destination vector, where the bolt ends
 		 */
-		Create(vector/start, vector/end)
+		Create(vector/start, vector/end, targets = null)
 			var/bolt/mainbolt = new (start, end)
 
 			bolts = list(mainbolt)
 
-			var/branches = rand(3, 6)
+			var/branches
+			var/boltTargets = FALSE
+
+			if(!targets)
+				branches = rand(3, 6)
+			else if(isnum(targets))
+				branches = targets
+			else
+				branches    = length(targets)
+				boltTargets = TRUE
 
 			var/list/positions = list()
 			var/p = 0
 			for(var/i = 1 to branches)
-				var/r = Rand(0.1, 0.3)
-				p += r
+
+				var/r      = Rand(0.1, 0.3)
+				p         += r
 				positions += p
 
 				if(p >= 1) break
@@ -67,13 +77,18 @@ BranchedBolt
 				// bolt.GetPoint() gets the position of the lightning bolt at specified fraction (0 = start of bolt, 1 = end)
 				var/vector/boltStart = mainbolt.GetPoint(positions[i])
 
-				// rotate 30 degrees. Alternate between rotating left and right.
-				var/vector/v = vectorRotate(vectorMultiply(diff, 1 - positions[i]), pick(30,-30))
-				var/vector/boltEnd = vectorAdd(boltStart, v)
+				var/vector/boltEnd
+				if(boltTargets)
+					var/atom/target = targets[i]
+					boltEnd = new (target.x * world.icon_size, target.y * world.icon_size)
+				else
+					// rotate 30 degrees. Alternate between rotating left and right.
+					var/vector/v = vectorRotate(vectorMultiply(diff, 1 - positions[i]), pick(30,-30))
+					boltEnd = vectorAdd(boltStart, v)
 
 				var/bolt/bolt = new (boltStart, boltEnd)
 				bolt.fade     = fade
-				bolts += bolt
+				bolts        += bolt
 
 		/**
 		 * Returns a list of turfs between the bolt's starting vector to the bolt's end vector without including branched bolts

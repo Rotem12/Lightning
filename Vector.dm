@@ -30,6 +30,14 @@ vector
 
 proc
 	/**
+	 * Returns true if vector
+	 *
+	 * @param v value to check
+	 */
+	isVector(v)
+		return istype(v, /vector)
+
+	/**
 	 * Returns a new vector equal to the sum of the two vectors
 	 *
 	 * @param v1 first vector
