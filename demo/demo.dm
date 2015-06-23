@@ -1,6 +1,8 @@
 #define DEBUG
 
-world/fps = 10
+world
+	fps       = 10
+	icon_size = 32
 
 turf
 	grass
@@ -55,8 +57,8 @@ obj
 
 turf
 	Click()
-		var/vector/start = new (usr.x * 32, usr.y * 32)
-		var/vector/dest  = new (src.x * 32, src.y * 32)
+		var/vector/start = new (usr.x * world.icon_size, usr.y * world.icon_size)
+		var/vector/dest  = new (src.x * world.icon_size, src.y * world.icon_size)
 
 		if(mode == 0)
 

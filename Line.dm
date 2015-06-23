@@ -33,11 +33,11 @@ line
 			var/vector/tangent = vectorSubtract(B, A)
 			var/rotation        = atan2(tangent.Y, tangent.X) - 90
 
-			var/offsetX = A.X % 32
-			var/offsetY = A.Y % 32
+			var/offsetX = A.X % world.icon_size
+			var/offsetY = A.Y % world.icon_size
 
-			var/x = (A.X - offsetX) / 32
-			var/y = (A.Y - offsetY) / 32
+			var/x = (A.X - offsetX) / world.icon_size
+			var/y = (A.Y - offsetY) / world.icon_size
 
 			var/obj/o = new type (locate(x, y, z))
 			o.pixel_x = offsetX

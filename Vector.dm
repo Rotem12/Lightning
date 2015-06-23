@@ -114,8 +114,8 @@ proc
 		var/vector/diff = vectorSubtract(end, start)
 
 		for(var/i = 1 to distance step accurate)
-			var/x = (start.X + diff.X * (i / distance)) / 32
-			var/y = (start.Y + diff.Y * (i / distance)) / 32
+			var/x = (start.X + diff.X * (i / distance)) / world.icon_size
+			var/y = (start.Y + diff.Y * (i / distance)) / world.icon_size
 
 			var/turf/t = locate(x, y, z)
 
