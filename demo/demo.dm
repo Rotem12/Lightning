@@ -24,11 +24,21 @@ mob
 			mode++
 			if(mode == 4)
 				mode = 0
+			if(mode == 0)
+				world << "Draw lines"
+				lines = list()
+			else if(mode == 1)
+				clear()
+				world << "Draw bolts"
+			else if(mode == 2)
+				world << "Draw branched bolts"
+			else if(mode == 3)
+				world << "Draw branched bolts towards near mobs"
 
-			if(mode == 0)      world << "Draw lines"
-			else if(mode == 1) world << "Draw bolts"
-			else if(mode == 2) world << "Draw branched bolts"
-			else if(mode == 3) world << "Draw branched bolts towards near mobs"
+var/list/lines
+proc/clear()
+	for(var/obj/segment/s in lines)
+		s.loc = null
 
 var
 	vector2
@@ -51,7 +61,7 @@ turf
 		if(mode == 0)
 
 			var/line/l = new(start, dest)
-			l.Draw(usr.z, /obj/segment, c)
+			lines += l.Draw(usr.z, /obj/segment, c)
 
 		else if(mode == 1)
 
