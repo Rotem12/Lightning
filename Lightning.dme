@@ -1,0 +1,25 @@
+// DM Environment file for TheLibrary.dme.
+// All manual changes should be made outside the BEGIN_ and END_ blocks.
+// New source code should be placed in .dm files: choose File/New --> Code File.
+
+// BEGIN_INTERNALS
+// END_INTERNALS
+
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+#define FILE_DIR "demo"
+// END_FILE_DIR
+
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+
+// BEGIN_INCLUDE
+#include "Bolt.dm"
+#include "BranchedBolt.dm"
+#include "Line.dm"
+#include "math.dm"
+#include "Vector.dm"
+#include "demo\demo.dm"
+#include "demo\map.dmm"
+// END_INCLUDE
+
