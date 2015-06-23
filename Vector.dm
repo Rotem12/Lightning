@@ -23,6 +23,7 @@ vector
 	proc
 		/**
 		* Returns the length of the vector
+		* @return the length of the vector
 	 	*/
 		Length()
 			return max(sqrt(X*X + Y*Y), 1)
@@ -33,6 +34,7 @@ proc
 	 * Returns true if vector
 	 *
 	 * @param v value to check
+	 * @return if value is vector or not
 	 */
 	isVector(v)
 		return istype(v, /vector)
@@ -42,6 +44,7 @@ proc
 	 *
 	 * @param v1 first vector
 	 * @param v2 second vector
+	 * @return new vector sum of the vectors added
 	 */
 	vectorAdd(vector/v1, vector/v2)
 		return new /vector (v1.X + v2.X, v1.Y + v2.Y)
@@ -50,6 +53,7 @@ proc
 	 *
 	 * @param v1 first vector to subtract from
 	 * @param v2 second vector
+	 * @return new vector sum of second vector subtracted from first
 	 */
 	vectorSubtract(vector/v1, vector/v2)
 		return new/vector(v1.X - v2.X, v1.Y - v2.Y)
@@ -59,24 +63,26 @@ proc
 	 *
 	 * @param v   vector to multiply
 	 * @param num number to multiply by
+	 * @return new vector multiplied by number
 	 */
 	vectorMultiply(vector/v, num)
 		return new/vector(v.X * num, v.Y * num)
 
 	/**
-	 * Returns the distance between two factors
+	 * Returns the distance between two vectors
 	 *
 	 * @param v1 first vector
 	 * @param v2 second vector
+	 * @return distance between the two vectors
 	 */
 	vectorDistance(vector/v1, vector/v2)
 		return sqrt((v1.X - v2.X) ** 2 + (v1.Y - v2.Y) ** 2)
 
 	/**
-	 * Returns the distance between two factors
+	 * Returns new normalized vector
 	 *
-	 * @param v1 first vector
-	 * @param v2 second vector
+	 * @param v vector to normalize
+	 * @return new normalized vector
 	 */
 	vectorNormalize(vector/v)
 		return new/vector(v.X / v.Length(), v.Y / v.Length())
@@ -86,6 +92,7 @@ proc
 	 *
 	 * @param v     the vector to rotate
 	 * @param angle the angle to rotate by
+	 * @return new rotated vector
 	 */
 	vectorRotate(vector/v, angle)
 		return new/vector(v.X * cos(angle) - v.Y * sin(angle), v.X * sin(angle) + v.Y * cos(angle))
@@ -99,6 +106,7 @@ proc
 	 * @param z         the z level on the map
 	 * @param accurate  controlls the accurecy of this function, lower number means more accurate results however it reduces performance
 	 *                  1 being the minimum
+     * @return a list of turfs between two vectors
 	 */
 	vectorGetTurfs(vector/start, vector/end, z, accurate = 16)
 		var/list/locs

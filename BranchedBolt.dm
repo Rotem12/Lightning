@@ -98,6 +98,7 @@ BranchedBolt
 		 * @param z         the map z level to search
 		 * @param accurate  controlls the accurecy of this function, lower number means more accurate results however it reduces performance
 		 *                  1 being the minimum, it should be noted even at 1 this will not be too accurate, use GetAllTurfs() for a more accurate result
+		 * @return a partial list of turfs the main bolt passes on
 		 */
 		GetTurfs(z, accurate = 16)
 			var/bolt/b = bolts[1]
@@ -112,6 +113,7 @@ BranchedBolt
 		 * @param z         the map z level to search
 		 * @param accurate  controlls the accurecy of this function, lower number means more accurate results however it reduces performance
 		 *                  1 being the minimum
+		 * @return a list of turfs the bolts pass on
 		 */
 		GetAllTurfs(z, accurate = 16)
 			var/list/locs = list()

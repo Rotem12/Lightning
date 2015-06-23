@@ -57,8 +57,9 @@ bolt
 		/**
 		 * Returns a list of segments from vector source to vector dest
 		 *
-		 * @param source source vector, where the bolt starts
-		 * @param dest   destination vector, where the bolt ends
+		 * @param  source source vector, where the bolt starts
+		 * @param  dest   destination vector, where the bolt ends
+		 * @return dest   a list of line segments
 		 */
 		createBolt(vector/source, vector/dest)
 			var/list/results = list()
@@ -113,9 +114,10 @@ bolt
 			return results
 
 		/**
-		 * Returns a segment at a given fraction 0 to 1, 0 being the start of the bolt and 1 being the end
+		 * Returns a vector at a given fraction 0 to 1, 0 being the start of the bolt and 1 being the end
 		 *
-		 * @param fraction 0 to 1, 0 being the start of the bolt and 1 being the end
+		 * @param  fraction 0 to 1, 0 being the start of the bolt and 1 being the end
+		 * @return a vector at fraction point of the bolt
 		 */
 		GetPoint(var/fraction)
 			var/index = round(fraction * segments.len)
@@ -132,9 +134,10 @@ bolt
 		 * because this only checks first and last vectors it returns a form of line between both vectors and can be inaccurate if bolt segments stray too far
 		 * It can return null if no turfs are found.
 		 *
-		 * @param z         the map z level to search
-		 * @param accurate  controlls the accurecy of this function, lower number means more accurate results however it reduces performance
-		 *                  1 being the minimum, it should be noted even at 1 this will not be too accurate, use GetAllTurfs() for a more accurate result
+		 * @param  z         the map z level to search
+		 * @param  accurate  controlls the accurecy of this function, lower number means more accurate results however it reduces performance
+		 *                   1 being the minimum, it should be noted even at 1 this will not be too accurate, use GetAllTurfs() for a more accurate result
+		 * @return a partial list of turfs the bolt passes on
 		 */
 		GetTurfs(z, accurate = 16)
 			var/line/start = segments[1]
@@ -149,6 +152,7 @@ bolt
 		 * @param z         the map z level to search
 		 * @param accurate  controlls the accurecy of this function, lower number means more accurate results however it reduces performance
 		 *                  1 being the minimum
+		 * @return a list of turfs the bolt passes on
 		 */
 		GetAllTurfs(z, accurate = 16)
 			var/list/locs = list()

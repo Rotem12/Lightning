@@ -27,6 +27,7 @@ line
 		 * @param z      the map z level to draw on
 		 * @param type   basic segment to use when drawing
 		 * @param color  color of the segment
+		 * @return an object of given type transformed into a line between defined vectors
 		 */
 		Draw(z, type, color = "#fff")
 			var/vector/tangent = vectorSubtract(B, A)
@@ -56,6 +57,7 @@ line
 		 * @param z         the map z level to search
 		 * @param accurate  controlls the accurecy of this function, lower number means more accurate results however it reduces performance
 		 *                  1 being the minimum
+		 * @return a list of turfs the line passes on
 		 */
 		GetTurfs(z, accurate = 16)
 			return vectorGetTurfs(A, B, z, accurate)
