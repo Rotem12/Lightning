@@ -62,14 +62,15 @@ BranchedBolt
 				boltTargets = TRUE
 
 			var/list/positions = list()
+
+			var/growth = 0.5 / branches
 			var/p = 0
 			for(var/i = 1 to branches)
-
-				var/r      = Rand(0.1, 0.3)
-				p         += r
+				var/r = Rand(growth / 3, growth * 3)
+				p += r
 				positions += p
 
-				if(p >= 1) break
+				if(p >= 0.50) break
 
 			var/vector/diff = vectorSubtract(end, start)
 
