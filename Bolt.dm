@@ -71,10 +71,10 @@ bolt
 
 			var/list/positions = list(0)
 
-			var/growth = max(1 / (length / 4), 0.001)
+			var/growth = 1 / (length / 4)
 			var/p = 0
 			for(var/i = 1 to length / 4)
-				var/r = Rand(growth, growth * 4)
+				var/r = Rand(growth / 3, growth * 3)
 				p += r
 				positions += p
 
