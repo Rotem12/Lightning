@@ -1,7 +1,7 @@
 #define DEBUG
 
 world
-	fps       = 10
+	fps       = 20
 	icon_size = 32
 
 turf
