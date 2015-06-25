@@ -28,6 +28,13 @@ vector
 		Length()
 			return max(sqrt(X*X + Y*Y), 1)
 
+		/**
+		* Rounds the vectors coordinates
+	 	*/
+		Round(r = 1)
+			X = round(X, r)
+			Y = round(Y, r)
+
 
 proc
 	/**
