@@ -26,17 +26,20 @@ mob
 	verb
 		setMode()
 			mode++
-			if(mode == 4)
+			if(mode == 5)
 				mode = 0
+
 			if(mode == 0)
 				world << "Draw lines"
 				lines = list()
-			else if(mode == 1)
+			if(mode == 1)
+				world << "Draw beams"
 				clear()
-				world << "Draw bolts"
 			else if(mode == 2)
-				world << "Draw branched bolts"
+				world << "Draw bolts"
 			else if(mode == 3)
+				world << "Draw branched bolts"
+			else if(mode == 4)
 				world << "Draw branched bolts towards near mobs"
 
 var/list/lines
@@ -50,7 +53,7 @@ var
 		B
 
 var/c = "#E4CCFF"
-var/mode = 1
+var/mode = 2
 
 obj
 	segment
@@ -69,15 +72,20 @@ turf
 
 		else if(mode == 1)
 
+			var/beam/b = new(start, dest, 50)
+			b.Draw(usr.z, /obj/segment, c, 3)
+
+		else if(mode == 2)
+
 			var/bolt/b = new(start, dest, 50)
 			b.Draw(usr.z, /obj/segment, c)
 
-		else if(mode == 2)
+		else if(mode == 3)
 
 			var/BranchedBolt/b = new(start, dest, 50)
 			b.Draw(usr.z, /obj/segment, c)
 
-		else if(mode == 3)
+		else if(mode == 4)
 
 			var/BranchedBolt/b = new(start, dest, 50, ohearers())
 			b.Draw(usr.z, /obj/segment, c)
