@@ -42,7 +42,10 @@ bolt
 		 * @param o  the object segment, each lightning bolt is made of several segments
 		 */
 		Effect(obj/o)
+			set waitfor = 0
 			animate(o, alpha = 0, time = 255 / fade, loop = 1)
+
+			sleep(255 / fade)
 			Dispose(o)
 
 		/**
@@ -52,8 +55,7 @@ bolt
 		 * @param o  the object segment to dispose
 		 */
 		Dispose(obj/o)
-			spawn(255 / fade)
-				o.loc = null
+			o.loc = null
 
 		/**
 		 * Returns a list of segments from vector source to vector dest
