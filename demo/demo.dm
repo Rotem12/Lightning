@@ -15,6 +15,8 @@ mob
 	icon       = '1.dmi'
 	icon_state = "person"
 
+	Stat()
+		stat("CPU:", world.cpu)
 
 	verb
 		setColor(i_Color as color)
