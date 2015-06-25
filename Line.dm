@@ -24,12 +24,13 @@ line
 		/**
 		 * Draws a line of type with a color between two assigned vectors on z
 		 *
-		 * @param z      the map z level to draw on
-		 * @param type   basic segment to use when drawing
-		 * @param color  color of the segment
+		 * @param z          the map z level to draw on
+		 * @param type       basic segment to use when drawing
+		 * @param color      color of the segment
+		 * @param thickness  thickness of the segment
 		 * @return an object of given type transformed into a line between defined vectors
 		 */
-		Draw(z, type, color = "#fff")
+		Draw(z, type, color = "#fff", thickness = 1)
 			var/vector/tangent = vectorSubtract(B, A)
 			var/rotation        = atan2(tangent.Y, tangent.X) - 90
 
@@ -46,7 +47,7 @@ line
 			var/newWidth = tangent.Length()
 			var/newX     = (newWidth - 1)/2
 
-			animate(o, transform = turn(matrix(newWidth, 0, newX, 0, 1, 0), rotation), color = color, time=0)
+			animate(o, transform = turn(matrix(newWidth, 0, newX, 0, thickness, 0), rotation), color = color, time=0)
 
 			return o
 

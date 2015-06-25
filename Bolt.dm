@@ -24,13 +24,14 @@ bolt
 		/**
 		 * Draws a bolt of type with a color between two assigned vectors on z
 		 *
-		 * @param z     the map z level to draw on
-		 * @param type  basic segment to use when drawing
-		 * @param color color of the segment
+		 * @param z         the map z level to draw on
+		 * @param type      basic segment to use when drawing
+		 * @param color     color of the bolt
+		 * @param thickness thickness of the bolt
 		 */
-		Draw(z, type, color = "#fff")
+		Draw(z, type, color = "#fff", thickness = 1)
 			for(var/line/segment in segments)
-				var/obj/o = segment.Draw(z, type, color)
+				var/obj/o = segment.Draw(z, type, color, thickness)
 				Effect(o)
 
 		/**

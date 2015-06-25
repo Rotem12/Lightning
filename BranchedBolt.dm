@@ -29,14 +29,15 @@ BranchedBolt
 		/**
 		 * Draws a branched lightning bolt of type with a color between two assigned vectors on z
 		 *
-		 * @param z     the map z level to draw on
-		 * @param type  basic segment to use when drawing
-		 * @param color color of the segment
+		 * @param z         the map z level to draw on
+		 * @param type      basic segment to use when drawing
+		 * @param color     color of the branched bolt
+		 * @param thickness thickness of the branched bolt
 		 */
-		Draw(z, type, color)
+		Draw(z, type, color = "#fff", thickness = 1)
 			for(var/bolt/b in bolts)
 				b.fade = fade
-				b.Draw(z, type, color)
+				b.Draw(z, type, color, thickness)
 
 		/**
 		 * Initializes the branched lightning bolts list
