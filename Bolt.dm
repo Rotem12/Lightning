@@ -11,7 +11,7 @@ bolt
 	 * Constructs the bolt, from vector source to vector dest
 	 *
 	 * @param source source vector, where the bolt starts
-	 * @param dest   destination vector, where the bold ends
+	 * @param dest   destination vector, where the bolt ends
 	 * @param fade   assigns fade out rate, default of 50
 	 */
 	New(vector/source, vector/dest, fade = 50)
@@ -60,7 +60,7 @@ bolt
 		 *
 		 * @param  source source vector, where the bolt starts
 		 * @param  dest   destination vector, where the bolt ends
-		 * @return dest   a list of line segments
+		 * @return dest   a list of line segments forming a lightning bolt
 		 */
 		createBolt(vector/source, vector/dest)
 			var/list/results = list()
