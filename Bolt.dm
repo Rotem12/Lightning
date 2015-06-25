@@ -104,6 +104,7 @@ bolt
 
 
 				var/vector/point = new (source.X + (tangent.X * pos) + (normal.X * displacement), source.Y + (tangent.Y * pos) + (normal.Y * displacement))
+				point.Round()
 
 				var/line/l = new(prevPoint, point)
 				results   += l
