@@ -29,7 +29,7 @@ bolt
 		 * @param color     color of the bolt
 		 * @param thickness thickness of the bolt
 		 */
-		Draw(z, type, color = "#fff", thickness = 1)
+		Draw(z, type = /obj/segment, color = "#fff", thickness = 1)
 			for(var/line/segment in segments)
 				var/obj/o = segment.Draw(z, type, color, thickness)
 				Effect(o)

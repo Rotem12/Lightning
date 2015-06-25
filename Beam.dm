@@ -26,7 +26,7 @@ beam
 		 * @param color     color of the beam
 		 * @param thickness thickness of the beam
 		 */
-		Draw(z, type, color = "#fff", thickness = 1)
+		Draw(z, type = /obj/segment, color = "#fff", thickness = 1)
 			set waitfor = 0
 			var/pos = 1
 			for(var/line/segment in segments)
@@ -37,7 +37,7 @@ beam
 		/**
 		 * Applys animation to beam segment
 		 * this could be overriden by child types to allow different animations to beam
-		 * by default, a beam will fade out then be disposed
+		 * by default, a beam will fully grow then begin to fade out
 		 *
 		 * @param o   the object segment, each beam is made of several segments
 		 * @param pos the position of the segment, this could be used to calculate the delay at which it is displayed to provide more control over animations

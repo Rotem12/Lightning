@@ -34,7 +34,7 @@ BranchedBolt
 		 * @param color     color of the branched bolt
 		 * @param thickness thickness of the branched bolt
 		 */
-		Draw(z, type, color = "#fff", thickness = 1)
+		Draw(z, type = /obj/segment, color = "#fff", thickness = 1)
 			for(var/bolt/b in bolts)
 				b.fade = fade
 				b.Draw(z, type, color, thickness)

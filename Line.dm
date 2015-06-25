@@ -30,7 +30,7 @@ line
 		 * @param thickness  thickness of the segment
 		 * @return an object of given type transformed into a line between defined vectors
 		 */
-		Draw(z, type, color = "#fff", thickness = 1)
+		Draw(z, type = /obj/segment, color = "#fff", thickness = 1)
 			var/vector/tangent = vectorSubtract(B, A)
 			var/rotation        = atan2(tangent.Y, tangent.X) - 90
 

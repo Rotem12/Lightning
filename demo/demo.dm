@@ -55,11 +55,6 @@ var
 var/c = "#E4CCFF"
 var/mode = 2
 
-obj
-	segment
-		icon = 'segment.dmi'
-
-
 turf
 	Click()
 		var/vector/start = new (usr.x * world.icon_size, usr.y * world.icon_size)
@@ -68,25 +63,25 @@ turf
 		if(mode == 0)
 
 			var/line/l = new(start, dest)
-			lines += l.Draw(usr.z, /obj/segment, c)
+			lines += l.Draw(usr.z, color = c)
 
 		else if(mode == 1)
 
 			var/beam/b = new(start, dest, 50)
-			b.Draw(usr.z, /obj/segment, c, 3)
+			b.Draw(usr.z, color = c, thickness = 3)
 
 		else if(mode == 2)
 
 			var/bolt/b = new(start, dest, 50)
-			b.Draw(usr.z, /obj/segment, c)
+			b.Draw(usr.z, color = c)
 
 		else if(mode == 3)
 
 			var/BranchedBolt/b = new(start, dest, 50)
-			b.Draw(usr.z, /obj/segment, c)
+			b.Draw(usr.z, color = c)
 
 		else if(mode == 4)
 
 			var/BranchedBolt/b = new(start, dest, 50, ohearers())
-			b.Draw(usr.z, /obj/segment, c)
+			b.Draw(usr.z, color = c)
 
