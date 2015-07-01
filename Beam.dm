@@ -1,3 +1,7 @@
+/**
+ * a line made of line segments, used to create a growing animated line (useful for beams, bars etc)
+ */
+
 beam
 	var
 		list/segments
@@ -19,9 +23,9 @@ beam
 
 	proc
 		/**
-		 * Draws a beam of type with a color between two assigned vectors on z
+		 * Draws a beam of type with a color between two assigned vectors on z or client screen
 		 *
-		 * @param z         the map z level to draw on
+		 * @param z         the map z level to draw on, if z is client it will draw on client screen
 		 * @param type      basic segment to use when drawing
 		 * @param color     color of the beam
 		 * @param thickness thickness of the beam

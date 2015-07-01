@@ -22,9 +22,9 @@ bolt
 
 	proc
 		/**
-		 * Draws a bolt of type with a color between two assigned vectors on z
+		 * Draws a bolt of type with a color between two assigned vectors on z or client screen
 		 *
-		 * @param z         the map z level to draw on
+		 * @param z         the map z level to draw on, if z is client it will draw on client screen
 		 * @param type      basic segment to use when drawing
 		 * @param color     color of the bolt
 		 * @param thickness thickness of the bolt

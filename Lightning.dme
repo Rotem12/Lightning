@@ -14,6 +14,7 @@
 // END_PREFERENCES
 
 // BEGIN_INCLUDE
+#include "Bar.dm"
 #include "Beam.dm"
 #include "Bolt.dm"
 #include "BranchedBolt.dm"
