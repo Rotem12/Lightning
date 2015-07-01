@@ -47,11 +47,6 @@ proc/clear()
 	for(var/obj/segment/s in lines)
 		s.loc = null
 
-var
-	vector2
-		A
-		B
-
 var/c = "#E4CCFF"
 var/mode = 2
 
