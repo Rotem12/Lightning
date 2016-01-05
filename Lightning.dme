@@ -22,6 +22,7 @@
 #include "math.dm"
 #include "segment.dm"
 #include "Vector.dm"
+#include "demo\force.dm"
 #ifdef __MAIN__ // BEGIN_DEMO
 #include "demo\demo.dm"
 #include "demo\map.dmm"
