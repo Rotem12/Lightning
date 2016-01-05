@@ -7,6 +7,9 @@ bolt
 		list/segments
 		fade
 
+		tmp
+			obj/lastCreatedBolt
+
 	/**
 	 * Constructs the bolt, from vector source to vector dest
 	 *
@@ -28,10 +31,23 @@ bolt
 		 * @param type      basic segment to use when drawing
 		 * @param color     color of the bolt
 		 * @param thickness thickness of the bolt
+		 * @param split     if set to 1 will create an obj for each segment, if not it will only create one object with segments as overlays
 		 */
-		Draw(z, type = /obj/segment, color = "#fff", thickness = 1)
-			for(var/line/segment in segments)
-				var/obj/o = segment.Draw(z, type, color, thickness)
+		Draw(z, type = /obj/segment, color = "#fff", thickness = 1, split = 0)
+
+			if(split)
+				for(var/line/segment in segments)
+					var/obj/o = segment.Draw(z, type, color, thickness)
+					Effect(o)
+			else
+				var/line/l = segments[1]
+				var/obj/o = new (l.A.Locate(z))
+
+				lastCreatedBolt = o
+
+				for(var/line/segment in segments)
+					segment.Draw(o, type, color, thickness)
+
 				Effect(o)
 
 		/**
@@ -49,12 +65,30 @@ bolt
 			Dispose(o)
 
 		/**
+		 * Rotates last created bolt to a different angle
+		 *
+		 * @param angle the new angle of the bolt
+		 */
+		Rotate(angle)
+
+			var/line/firstLine = segments[1]
+			var/line/lastLine  = segments[segments.len]
+
+			var/vector/tangent  = vectorSubtract(lastLine.B, firstLine.A)
+			var/rotation        = atan2(tangent.Y, tangent.X) - 90
+
+			angle -= rotation
+
+			lastCreatedBolt.transform = turn(matrix(), angle)
+
+		/**
 		 * Handles soft deletion of lightning bolt segments
 		 * by default after a lightning bolt faded it will be disposed
 		 *
 		 * @param o  the object segment to dispose
 		 */
 		Dispose(obj/o)
+			lastCreatedBolt = null
 			o.loc = null
 
 		/**

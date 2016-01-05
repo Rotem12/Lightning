@@ -33,11 +33,12 @@ BranchedBolt
 		 * @param type      basic segment to use when drawing
 		 * @param color     color of the branched bolt
 		 * @param thickness thickness of the branched bolt
+		 * @param split     if set to 1 will create an obj for each segment, if not it will only create one object with segments as overlays
 		 */
-		Draw(z, type = /obj/segment, color = "#fff", thickness = 1)
+		Draw(z, type = /obj/segment, color = "#fff", thickness = 1, split = 0)
 			for(var/bolt/b in bolts)
 				b.fade = fade
-				b.Draw(z, type, color, thickness)
+				b.Draw(z, type, color, thickness, split)
 
 		/**
 		 * Initializes the branched lightning bolts list
