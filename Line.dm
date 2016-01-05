@@ -28,28 +28,30 @@ line
 		 * @param type       basic segment to use when drawing
 		 * @param color      color of the segment
 		 * @param thickness  thickness of the segment
-		 * @return an object of given type transformed into a line between defined vectors
+		 * @return an object or an image of given type transformed into a line between defined vectors
 		 */
 		Draw(z = 1, type = /obj/segment, color = "#fff", thickness = 1)
 			var/vector/tangent  = vectorSubtract(B, A)
 			var/rotation        = atan2(tangent.Y, tangent.X) - 90
 
-			var/obj/o = new type
-
 			var/newWidth = tangent.Length()
 			var/newX     = (newWidth - 1)/2
 
 			var/matrix/m = turn(matrix(newWidth, 0, newX, 0, thickness, 0), rotation)
-			o.color      = color
-			o.alpha      = 255
 
 			if(istype(z, /atom/movable))
+				var/image/i = new (type)
+
 				var/atom/movable/parent = z
 				m.Translate(A.X - (parent.pixel_x + parent.x * world.icon_size), A.Y - (parent.pixel_y + parent.y * world.icon_size))
-				o.transform = m
-				parent.overlays += o
+				i.transform = m
+				parent.overlays += i
 
+				return i
 			else
+
+				var/obj/o = new type
+
 				var/offsetX = A.X % world.icon_size
 				var/offsetY = A.Y % world.icon_size
 
@@ -57,6 +59,8 @@ line
 				var/y = (A.Y - offsetY) / world.icon_size
 
 				o.transform = m
+				o.color      = color
+				o.alpha      = 255
 
 				if(isnum(z))
 					o.loc = locate(x, y, z)
@@ -69,7 +73,7 @@ line
 					c.screen    += o
 
 
-			return o
+				return o
 
 		/**
 		 * Returns a list of turfs the line passes through

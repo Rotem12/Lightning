@@ -45,6 +45,9 @@ bolt
 
 				lastCreatedBolt = o
 
+				o.alpha = 255
+				o.color = color
+
 				for(var/line/segment in segments)
 					segment.Draw(o, type, color, thickness)
 
