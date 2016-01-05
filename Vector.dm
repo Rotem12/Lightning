@@ -35,6 +35,20 @@ vector
 			X = round(X, r)
 			Y = round(Y, r)
 
+		/**
+		* Returns the start location turf of vector on z level
+	    * @param  the z level
+		* @return the start location turf of vector on z level
+	 	*/
+		Locate(z)
+			var/offsetX = X % world.icon_size
+			var/offsetY = Y % world.icon_size
+
+			var/x = (X - offsetX) / world.icon_size
+			var/y = (Y - offsetY) / world.icon_size
+
+			return locate(x, y, z)
+
 
 proc
 	/**
