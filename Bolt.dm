@@ -48,8 +48,11 @@ bolt
 				o.alpha = 255
 				o.color = color
 
+				var/list/lines = list()
 				for(var/line/segment in segments)
-					segment.Draw(o, type, color, thickness)
+					lines += segment.Draw(o, type, color, thickness)
+
+				o.overlays = lines
 
 				Effect(o)
 

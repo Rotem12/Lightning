@@ -45,9 +45,8 @@ line
 				var/atom/movable/parent = z
 				m.Translate(A.X - (parent.pixel_x + parent.x * world.icon_size), A.Y - (parent.pixel_y + parent.y * world.icon_size))
 				i.transform = m
-				parent.overlays += i
 
-				return i
+				return i.appearance
 			else
 
 				var/obj/o = new type
