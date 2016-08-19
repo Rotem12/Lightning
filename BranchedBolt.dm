@@ -68,7 +68,7 @@ BranchedBolt
 			var/growth = 0.5 / branches
 			var/p = 0
 			for(var/i = 1 to branches)
-				var/r = Rand(growth / 3, growth * 3)
+				var/r = __rand(growth / 3, growth * 3)
 				p += r
 				positions += p
 

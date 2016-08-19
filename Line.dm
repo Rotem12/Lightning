@@ -32,7 +32,7 @@ line
 		 */
 		Draw(z = 1, type = /obj/segment, color = "#fff", thickness = 1)
 			var/vector/tangent  = vectorSubtract(B, A)
-			var/rotation        = atan2(tangent.Y, tangent.X) - 90
+			var/rotation        = __atan2(tangent.Y, tangent.X) - 90
 
 			var/newWidth = tangent.Length()
 			var/newX     = (newWidth - 1)/2

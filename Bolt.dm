@@ -81,7 +81,7 @@ bolt
 			var/line/lastLine  = segments[segments.len]
 
 			var/vector/tangent  = vectorSubtract(lastLine.B, firstLine.A)
-			var/rotation        = atan2(tangent.Y, tangent.X) - 90
+			var/rotation        = __atan2(tangent.Y, tangent.X) - 90
 
 			angle -= rotation
 
@@ -117,7 +117,7 @@ bolt
 			var/growth = 1 / (length / 4)
 			var/p = 0
 			for(var/i = 1 to length / 4)
-				var/r = Rand(growth / 3, growth * 3)
+				var/r = __rand(growth / 3, growth * 3)
 				p += r
 				positions += p
 
@@ -137,7 +137,7 @@ bolt
 				// defines an envelope. Points near the middle of the bolt can be further from the central line.
 				var/envelope = pos > 0.95 ? 20 * (1 - pos) : 1
 
-				var/displacement = Rand(-Sway, Sway)
+				var/displacement = __rand(-Sway, Sway)
 
 				displacement -= (displacement - prevDisplacement) * (1 - scale)
 				displacement *= envelope
