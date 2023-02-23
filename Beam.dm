@@ -30,11 +30,11 @@ beam
 		 * @param color     color of the beam
 		 * @param thickness thickness of the beam
 		 */
-		Draw(z, type = /obj/segment, color = "#fff", thickness = 1)
+		Draw(z, type = /obj/segmentBeam, color = "#fff", thickness = 1)
 			set waitfor = 0
 			var/pos = 1
 			for(var/line/segment in segments)
-				var/obj/o = segment.Draw(z, type, color, thickness)
+				var/obj/o = segment.DrawObject(z, type, color, thickness)
 				Effect(o, pos++)
 				sleep(world.tick_lag)
 
