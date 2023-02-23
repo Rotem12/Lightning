@@ -4,22 +4,33 @@
 
 beam
 	var
-		list/segments
+		vector
+			start
+			end
 		fade
+		speed
+
+		matrix/endTransform
+
+		newWidth
+		rotation
+		thickness
 
 	/**
 	 * Constructs the beam, from vector source to vector dest
 	 *
 	 * @param source    source vector, where the bolt starts
 	 * @param dest      destination vector, where the beam ends
-	 * @param placement distance between every segment, lower means more segments, default of 32
 	 * @param fade      assigns fade out rate, default of 25
 	 */
-	New(vector/source, vector/dest, placement = 32, fade = 25)
+	New(vector/source, vector/dest, speed = 20, fade = 25)
 		..()
 
-		segments      = createBeam(source, dest, placement)
-		src.fade      = 25
+		src.fade  = fade
+		src.speed = speed
+
+		start = source
+		end   = dest
 
 	proc
 		/**
@@ -30,13 +41,43 @@ beam
 		 * @param color     color of the beam
 		 * @param thickness thickness of the beam
 		 */
-		Draw(z, type = /obj/segmentBeam, color = "#fff", thickness = 1)
-			set waitfor = 0
-			var/pos = 1
-			for(var/line/segment in segments)
-				var/obj/o = segment.DrawObject(z, type, color, thickness)
-				Effect(o, pos++)
-				sleep(world.tick_lag)
+		Draw(z = 1, type = /obj/segmentBeam, color = "#fff", thickness = 1)
+
+			src.thickness = thickness
+
+			var/vector/tangent  = vectorSubtract(end, start)
+			rotation        = __atan2(tangent.Y, tangent.X) - 90
+
+			newWidth = tangent.Length()
+			var/newX = (newWidth - 1)/2
+
+			endTransform = turn(matrix(newWidth, 0, newX, 0, thickness, 0), rotation)
+
+			var/obj/o = new type
+
+			var/offsetX = start.X % world.icon_size
+			var/offsetY = start.Y % world.icon_size
+
+			var/x = (start.X - offsetX) / world.icon_size
+			var/y = (start.Y - offsetY) / world.icon_size
+
+			o.transform = turn(matrix(1, 0, 1, 0, thickness, 0), rotation)
+			o.color      = color
+			o.alpha      = 255
+
+			if(isnum(z))
+				o.loc = locate(x, y, z)
+				o.pixel_x = offsetX
+				o.pixel_y = offsetY
+
+			else
+				var/client/c = z
+				o.screen_loc = "[x]:[offsetX],[y]:[offsetY]"
+				c.screen    += o
+
+			Effect(o)
+
+			return o
 
 		/**
 		 * Applys animation to beam segment
@@ -44,16 +85,18 @@ beam
 		 * by default, a beam will fully grow then begin to fade out
 		 *
 		 * @param o   the object segment, each beam is made of several segments
-		 * @param pos the position of the segment, this could be used to calculate the delay at which it is displayed to provide more control over animations
 		 */
-		Effect(obj/o, pos)
+		Effect(obj/o)
 			set waitfor = 0
-			sleep(world.tick_lag * (segments.len - pos))
+
+			animate(o, transform = endTransform, time = speed, flags = ANIMATION_LINEAR_TRANSFORM )
+
+			sleep(speed)
 
 			animate(o, alpha = 0, time = 255 / fade, loop = 1)
 
 			sleep(255 / fade)
-			Dispose(o, pos)
+			Dispose(o)
 
 		/**
 		 * Handles soft deletion of beam segments
@@ -65,36 +108,6 @@ beam
 			o.loc = null
 
 		/**
-		 * Returns a list of segments from vector source to vector dest
-		 *
-		 * @param  source source vector, where the beam starts
-		 * @param  dest   destination vector, where the beam ends
-		 * @return dest   a list of line segments forming a beam
-		 */
-		createBeam(vector/source, vector/dest, placement = 32)
-			var/list/results = list()
-
-			var/vector/tangent = vectorSubtract(dest, source)
-			var/length = tangent.Length()
-
-			var/vector/prevPoint = source
-			for(var/i = 1 to length / placement)
-
-				var/pos = i / (length / placement)
-				var/vector/endPoint = new (source.X + (tangent.X * pos), source.Y + (tangent.Y * pos))
-
-				endPoint.Round()
-				var/line/l = new(prevPoint, endPoint)
-				results   += l
-
-				prevPoint        = endPoint
-
-			var/line/l = new(prevPoint, dest)
-			results += l
-
-			return results
-
-		/**
 		 * Returns a list of turfs between the beam's starting vector to the beam's end vector
 		 * It can return null if no turfs are found.
 		 *
@@ -104,7 +117,4 @@ beam
 		 * @return a list of turfs the beam passes on
 		 */
 		GetTurfs(z, accurate = 16)
-			var/line/start = segments[1]
-			var/line/end = segments[segments.len]
-
-			return vectorGetTurfs(start.A, end.B, z, accurate)
+			return vectorGetTurfs(start, end, z, accurate)

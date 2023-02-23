@@ -66,7 +66,7 @@ turf
 
 		else if(mode == 1)
 
-			var/beam/b = new(start, dest, 50)
+			var/beam/b = new(start, dest, speed=20, fade=50)
 			b.Draw(usr.z, color = c, thickness = 3)
 
 		else if(mode == 2)
