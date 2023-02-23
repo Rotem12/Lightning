@@ -55,6 +55,10 @@ turf
 		var/vector/start = new (usr.x * world.icon_size, usr.y * world.icon_size)
 		var/vector/dest  = new (src.x * world.icon_size, src.y * world.icon_size)
 
+		// shoot from hand
+		start.X += (WEST & usr.dir) ? 10 : 22
+		start.Y += 14
+
 		if(mode == 0)
 
 			var/line/l = new(start, dest)
