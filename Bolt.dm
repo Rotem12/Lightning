@@ -45,14 +45,17 @@ bolt
 
 				lastCreatedBolt = o
 
-				o.alpha = 255
-				o.color = color
+				var/mutable_appearance/ma = new(o)
 
-				var/list/lines = list()
+				ma.alpha = 255
+				ma.color = color
+
+				var/obj/s = new type ()
+
 				for(var/line/segment in segments)
-					lines += segment.Draw(o, type, color, thickness)
+					ma.overlays += segment.Draw(o, s, color, thickness)
 
-				o.overlays = lines
+				o.appearance = ma
 
 				Effect(o)
 
