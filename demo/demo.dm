@@ -26,7 +26,7 @@ mob
 	verb
 		setMode()
 			mode++
-			if(mode == 5)
+			if(mode == 6)
 				mode = 0
 
 			if(mode == 0)
@@ -41,6 +41,8 @@ mob
 				world << "Draw branched bolts"
 			else if(mode == 4)
 				world << "Draw branched bolts towards near mobs"
+			else if(mode == 5)
+				world << "Draw two colored bolt"
 
 var/list/lines
 proc/clear()
@@ -66,7 +68,7 @@ turf
 		if(mode == 0)
 
 			var/line/l = new(start, dest)
-			lines += l.DrawObject(usr.z, color = c)
+			lines += l.Draw(usr.z, color = c)
 
 		else if(mode == 1)
 
@@ -87,4 +89,9 @@ turf
 
 			var/BranchedBolt/b = new(start, dest, 50, ohearers())
 			b.Draw(usr.z, color = c)
+		else if(mode == 5)
+
+			var/bolt/half/b = new(start, dest, 50)
+			b.Draw(usr.z, color = "#30ff30", secondColor = "#ff3030", percent=0.5, thickness = 1)
+
 
