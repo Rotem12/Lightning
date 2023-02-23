@@ -8,6 +8,7 @@ bolt/force
 		o.alpha = 255
 
 		animate(o, alpha = 0, time = 255 / rand(fade * 0.8, fade * 1.2), loop = -1)
+		animate(alpha = 255, time = 0)
 
 
 mob
