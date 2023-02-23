@@ -21,7 +21,7 @@ bolt
 		..()
 
 		segments    = createBolt(source, dest)
-		src.fade    = 50
+		src.fade    = fade
 
 	proc
 		/**
