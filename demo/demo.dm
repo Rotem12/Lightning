@@ -62,7 +62,7 @@ turf
 		if(mode == 0)
 
 			var/line/l = new(start, dest)
-			lines += l.Draw(usr.z, color = c)
+			lines += l.DrawObject(usr.z, color = c)
 
 		else if(mode == 1)
 
