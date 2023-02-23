@@ -53,7 +53,7 @@ bolt
 				var/obj/s = new type ()
 
 				for(var/line/segment in segments)
-					ma.overlays += segment.Draw(o, s, color, thickness)
+					ma.overlays += segment.DrawOverlay(o, s, thickness)
 
 				o.appearance = ma
 

@@ -26,11 +26,10 @@ line
 		 *
 		 * @param root       root object for starting position, return appearance can be added as an overlay to this object
 		 * @param s          basic segment to use when drawing
-		 * @param color      color of the segment
 		 * @param thickness  thickness of the segment
 		 * @return an object or an image of given type transformed into a line between defined vectors
 		 */
-		Draw(obj/root, obj/s, color = "#fff", thickness = 1)
+		DrawOverlay(obj/root, obj/s, thickness = 1)
 			var/vector/tangent  = vectorSubtract(B, A)
 			var/rotation        = __atan2(tangent.Y, tangent.X) - 90
 
@@ -53,7 +52,7 @@ line
 		 * @param thickness  thickness of the segment
 		 * @return an object or an image of given type transformed into a line between defined vectors
 		 */
-		DrawObject(z = 1, type = /obj/segment, color = "#fff", thickness = 1)
+		Draw(z = 1, type = /obj/segment, color = "#fff", thickness = 1)
 			var/vector/tangent  = vectorSubtract(B, A)
 			var/rotation        = __atan2(tangent.Y, tangent.X) - 90
 
