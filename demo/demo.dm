@@ -59,6 +59,10 @@ turf
 		start.X += (WEST & usr.dir) ? 10 : 22
 		start.Y += 14
 
+		// middle of clicked turf
+		dest.X += 16
+		dest.Y += 16
+
 		if(mode == 0)
 
 			var/line/l = new(start, dest)
