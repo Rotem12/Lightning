@@ -4,7 +4,7 @@
 
 beam
 	var
-		vector
+		___vector
 			start
 			end
 		fade
@@ -23,7 +23,7 @@ beam
 	 * @param dest      destination vector, where the beam ends
 	 * @param fade      assigns fade out rate, default of 25
 	 */
-	New(vector/source, vector/dest, speed = 20, fade = 25)
+	New(___vector/source, ___vector/dest, speed = 20, fade = 25)
 		..()
 
 		src.fade  = fade
@@ -45,7 +45,7 @@ beam
 
 			src.thickness = thickness
 
-			var/vector/tangent  = vectorSubtract(end, start)
+			var/___vector/tangent  = vectorSubtract(end, start)
 			rotation        = __atan2(tangent.Y, tangent.X) - 90
 
 			newWidth = tangent.Length()

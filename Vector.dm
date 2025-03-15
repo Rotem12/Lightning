@@ -2,7 +2,7 @@
  * a simple 2D vector
  */
 
-vector
+___vector
 	var
 		X
 		Y
@@ -58,7 +58,7 @@ proc
 	 * @return if value is vector or not
 	 */
 	isVector(v)
-		return istype(v, /vector)
+		return istype(v, /___vector)
 
 	/**
 	 * Returns a new vector equal to the sum of the two vectors
@@ -67,7 +67,7 @@ proc
 	 * @param v2 second vector
 	 * @return new vector sum of the vectors added
 	 */
-	vectorAdd(vector/v1, vector/v2)
+	vectorAdd(___vector/v1, ___vector/v2)
 		return new /vector (v1.X + v2.X, v1.Y + v2.Y)
 	/**
 	 * Returns a new vector equal to second vector subtracted from first
@@ -76,7 +76,7 @@ proc
 	 * @param v2 second vector
 	 * @return new vector sum of second vector subtracted from first
 	 */
-	vectorSubtract(vector/v1, vector/v2)
+	vectorSubtract(___vector/v1, ___vector/v2)
 		return new/vector(v1.X - v2.X, v1.Y - v2.Y)
 
 	/**
@@ -86,7 +86,7 @@ proc
 	 * @param num number to multiply by
 	 * @return new vector multiplied by number
 	 */
-	vectorMultiply(vector/v, num)
+	vectorMultiply(___vector/v, num)
 		return new/vector(v.X * num, v.Y * num)
 
 	/**
@@ -96,7 +96,7 @@ proc
 	 * @param v2 second vector
 	 * @return distance between the two vectors
 	 */
-	vectorDistance(vector/v1, vector/v2)
+	vectorDistance(___vector/v1, ___vector/v2)
 		return sqrt((v1.X - v2.X) ** 2 + (v1.Y - v2.Y) ** 2)
 
 	/**
@@ -105,7 +105,7 @@ proc
 	 * @param v vector to normalize
 	 * @return new normalized vector
 	 */
-	vectorNormalize(vector/v)
+	vectorNormalize(___vector/v)
 		return new/vector(v.X / v.Length(), v.Y / v.Length())
 
 	/**
@@ -115,7 +115,7 @@ proc
 	 * @param angle the angle to rotate by
 	 * @return new rotated vector
 	 */
-	vectorRotate(vector/v, angle)
+	vectorRotate(___vector/v, angle)
 		return new/vector(v.X * cos(angle) - v.Y * sin(angle), v.X * sin(angle) + v.Y * cos(angle))
 
 	/**
@@ -129,10 +129,10 @@ proc
 	 *                  1 being the minimum
      * @return a list of turfs between two vectors
 	 */
-	vectorGetTurfs(vector/start, vector/end, z, accurate = 16)
+	vectorGetTurfs(___vector/start, ___vector/end, z, accurate = 16)
 		var/list/locs
 		var/distance    = vectorDistance(start, end)
-		var/vector/diff = vectorSubtract(end, start)
+		var/___vector/diff = vectorSubtract(end, start)
 
 		for(var/i = 1 to distance step accurate)
 			var/x = (start.X + diff.X * (i / distance)) / world.icon_size

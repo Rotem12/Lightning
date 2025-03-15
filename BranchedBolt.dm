@@ -6,7 +6,7 @@ BranchedBolt
 
 	var
 		list/bolts
-		vector/end
+		___vector/end
 
 		fade
 
@@ -17,7 +17,7 @@ BranchedBolt
 	 * @param dest   destination vector, where the bold ends
 	 * @param fade   assigns fade out rate, default of 50
 	 */
-	New(vector/start, vector/end, fade = 50, targets=null)
+	New(___vector/start, ___vector/end, fade = 50, targets=null)
 		..()
 
 		src.end  = end
@@ -47,7 +47,7 @@ BranchedBolt
 		 * @param source source vector, where the bolt starts
 		 * @param dest   destination vector, where the bolt ends
 		 */
-		Create(vector/start, vector/end, targets = null)
+		Create(___vector/start, ___vector/end, targets = null)
 			var/bolt/mainbolt = new (start, end)
 
 			bolts = list(mainbolt)
@@ -74,19 +74,19 @@ BranchedBolt
 
 				if(p >= 0.50) break
 
-			var/vector/diff = vectorSubtract(end, start)
+			var/___vector/diff = vectorSubtract(end, start)
 
 			for(var/i = 1 to positions.len)
 				// bolt.GetPoint() gets the position of the lightning bolt at specified fraction (0 = start of bolt, 1 = end)
-				var/vector/boltStart = mainbolt.GetPoint(positions[i])
+				var/___vector/boltStart = mainbolt.GetPoint(positions[i])
 
-				var/vector/boltEnd
+				var/___vector/boltEnd
 				if(boltTargets)
 					var/atom/target = targets[i]
 					boltEnd = new (target.x * world.icon_size, target.y * world.icon_size)
 				else
 					// rotate 30 degrees. Alternate between rotating left and right.
-					var/vector/v = vectorRotate(vectorMultiply(diff, 1 - positions[i]), pick(30,-30))
+					var/___vector/v = vectorRotate(vectorMultiply(diff, 1 - positions[i]), pick(30,-30))
 					boltEnd = vectorAdd(boltStart, v)
 
 				var/bolt/bolt = new (boltStart, boltEnd)

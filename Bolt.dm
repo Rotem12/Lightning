@@ -17,7 +17,7 @@ bolt
 	 * @param dest   destination vector, where the bolt ends
 	 * @param fade   assigns fade out rate, default of 50
 	 */
-	New(vector/source, vector/dest, fade = 50)
+	New(___vector/source, ___vector/dest, fade = 50)
 		..()
 
 		segments    = createBolt(source, dest)
@@ -83,7 +83,7 @@ bolt
 			var/line/firstLine = segments[1]
 			var/line/lastLine  = segments[segments.len]
 
-			var/vector/tangent  = vectorSubtract(lastLine.B, firstLine.A)
+			var/___vector/tangent  = vectorSubtract(lastLine.B, firstLine.A)
 			var/rotation        = __atan2(tangent.Y, tangent.X) - 90
 
 			angle -= rotation
@@ -107,11 +107,11 @@ bolt
 		 * @param  dest   destination vector, where the bolt ends
 		 * @return dest   a list of line segments forming a lightning bolt
 		 */
-		createBolt(vector/source, vector/dest)
+		createBolt(___vector/source, ___vector/dest)
 			var/list/results = list()
 
-			var/vector/tangent = vectorSubtract(dest, source)
-			var/vector/normal  = vectorNormalize(new (tangent.Y, -tangent.X))
+			var/___vector/tangent = vectorSubtract(dest, source)
+			var/___vector/normal  = vectorNormalize(new (tangent.Y, -tangent.X))
 
 			var/length = tangent.Length()
 
@@ -129,7 +129,7 @@ bolt
 			var/const/Sway       = 80
 			var/const/Jaggedness = 1 / Sway
 
-			var/vector/prevPoint = source
+			var/___vector/prevPoint = source
 			var/prevDisplacement  = 0
 			for(var/i = 2 to positions.len)
 				var/pos = positions[i]
@@ -146,7 +146,7 @@ bolt
 				displacement *= envelope
 
 
-				var/vector/point = new (source.X + (tangent.X * pos) + (normal.X * displacement), source.Y + (tangent.Y * pos) + (normal.Y * displacement))
+				var/___vector/point = new (source.X + (tangent.X * pos) + (normal.X * displacement), source.Y + (tangent.Y * pos) + (normal.Y * displacement))
 				point.Round()
 
 				var/line/l = new(prevPoint, point)

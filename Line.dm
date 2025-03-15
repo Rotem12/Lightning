@@ -4,7 +4,7 @@
 
 line
 	var
-		vector
+		___vector
 			A
 			B
 
@@ -30,7 +30,7 @@ line
 		 * @return an object or an image of given type transformed into a line between defined vectors
 		 */
 		DrawOverlay(obj/root, obj/s, thickness = 1)
-			var/vector/tangent  = vectorSubtract(B, A)
+			var/___vector/tangent  = vectorSubtract(B, A)
 			var/rotation        = __atan2(tangent.Y, tangent.X) - 90
 
 			var/newWidth = tangent.Length()
@@ -53,7 +53,7 @@ line
 		 * @return an object or an image of given type transformed into a line between defined vectors
 		 */
 		Draw(z = 1, type = /obj/segment, color = "#fff", thickness = 1)
-			var/vector/tangent  = vectorSubtract(B, A)
+			var/___vector/tangent  = vectorSubtract(B, A)
 			var/rotation        = __atan2(tangent.Y, tangent.X) - 90
 
 			var/newWidth = tangent.Length()
@@ -103,7 +103,7 @@ line
 		 * @param angle the angle to rotate thel line by
 		 */
 		Rotate(angle)
-			var/vector/diff     = vectorSubtract(B, A)
-			var/vector/rotatedB = vectorRotate(diff, angle)
+			var/___vector/diff     = vectorSubtract(B, A)
+			var/___vector/rotatedB = vectorRotate(diff, angle)
 
 			B = vectorAdd(rotatedB, A)
